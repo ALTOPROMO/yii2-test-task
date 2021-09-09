@@ -19,8 +19,14 @@ class TicketController extends Controller
      */
     public function actionCreate()
     {
-        $service_id = $_REQUEST['service_id'];
-        $text = $_REQUEST['text'];
+        $service_id = Yii::$app->request->post()['service_id'];
+        $text = Yii::$app->request->post()['text'];
+
+        /**
+         * А если используем ActiveForm, например, из админки, можно так:
+         * 
+         * $var = Yii::$app->request->post('param');
+         */
 
         // Получаем модель свободного сотрудника.
         $employee = Employee::getFreeByService($service_id);
